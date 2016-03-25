@@ -2,10 +2,10 @@
 import sys 
 
 ########################################################
-# 		prepare vectors for supervised                 #
-#			   machine learning					       #
-#		  python XX0.py categorie.txt categorie		   #
-#													   #
+# 		prepare vectors for supervised         #
+#	   	 	machine learning               #
+#           python XX0.py categorie.txt categorie      #
+#						       #
 ########################################################
 file=sys.argv[1]
 def Xtrain():
