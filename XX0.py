@@ -1,26 +1,39 @@
 # coding: utf-8
+import sys 
 
-X_sentence=[]
-sentence1="un test"
-sentence2="un test"
-
-def X0sentence(corpus):
-	X0_sentence=[]
-	for sentence in corpus:
-		sentence=[sentence]
-		(X0_sentence.append(sentence))
-	return X0_sentence
-
-def Xsentence (corpus):
-	X_sentence=[]
-	corpus=list(corpus)
-	for sentence in corpus:
-		X_sentence.append(sentence)
-	return X_sentence
-x2 = Xsentence(sentence2)
-x= X0sentence(sentence1)
-print x
-print x2
+########################################################
+# 		prepare vectors for supervised                 #
+#			   machine learning					       #
+#		  python XX0.py categorie.txt categorie		   #
+#													   #
+########################################################
+file=sys.argv[1]
+def Xtrain():
+	corpus=[]
+	fs=open(file,"r")
+	lines=fs.readlines()
+	for line in lines:
+		line=line.split()
+		for word in line:
+			corpus.append(word)
+	fs.close()
+	return corpus
 
 
-	
+
+def Ytrain():
+	corpus=[]
+	categorie=[sys.argv[2]]
+	fs=open(file,"r")
+	lines=fs.readlines()
+	for line in lines:
+		line=line.split()
+		for word in line:
+
+			corpus.append(categorie)
+	fs.close()
+	return corpus
+
+
+
+
