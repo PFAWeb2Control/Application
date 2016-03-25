@@ -17,7 +17,10 @@ def Xsentence (corpus):
 	for sentence in corpus:
 		X_sentence.append(sentence)
 	return X_sentence
-
+x2 = Xsentence(sentence2)
+x= X0sentence(sentence1)
+print x
+print x2
 
 
 	

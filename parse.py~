@@ -1,0 +1,20 @@
+# coding: utf-8
+#!/usr/bin/python
+
+
+import sys 
+import numpy as np
+
+file = sys.argv[1]
+
+def parse(file):
+    my_list = []
+    fichier = open(file, "r")
+    toutesleslignes = fichier.readlines()
+    for ligne in toutesleslignes:
+        my_list.append(ligne)
+    print my_list    
+        
+
+parse(fichier)    
+fichier.close()
