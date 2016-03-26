@@ -5,11 +5,11 @@ from nltk.stem.snowball import FrenchStemmer
 #from preprocess import Enleve_Accents
 
 
- ##################################################
- #     intput_: original dictionary               #
- #     output_: stemmed dictionary                #
- #     example: python original.txt stemmed.txt   #
- ##################################################
+ ##################################################################
+ #     intput_: original dictionary                               #
+ #     output_: stemmed dictionary                                #
+ #     example: python stemmingDico.py original.txt stemmed.txt   #
+ ##################################################################
  
 		
 def Enleve_Accents(txt):
