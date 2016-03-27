@@ -207,6 +207,13 @@ _:-ms-input-placeholder, :root .demo-graph {
           align-items: center;
 }
 
+.dot {
+    background-color: #FFFFFF;
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+}
+
 .badge {
     color: #FFFFFF;
     font-weight: bold;
@@ -236,12 +243,11 @@ _:-ms-input-placeholder, :root .demo-graph {
     text-align: right;
 }
 
-
-.cat-item:hover {
-    background-color: white;
-}
-
 .list-item {
     color: white;
     font-weight: bold;
+}
+
+.mdl-navigation__link:hover .list-item {
+    color: black;
 }

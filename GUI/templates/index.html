@@ -49,8 +49,9 @@
             <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
 
                 {% for cat in categories %}
-                <a class="mdl-navigation__link cat-main-{{cat.id}} cat-item" href="#" onclick="toggleCat({{cat.id}}, {{num_cat}})" style="background-color: {{cat.color}};">
-                    <span class="badge">{{cat.name}}</span>
+                <a class="mdl-navigation__link cat-main-{{cat.id}} cat-item" href="" onclick="toggleCat({{cat.id}}, {{num_cat}})">
+                    <i class="dot mdl-color-text--blue-grey-400 material-icons" style="background-color: {{cat.color}};"></i>
+                    <span class="list-item">{{cat.name}}</span>
                 </a>
                 {% endfor %}
                 <a class="mdl-navigation__link" onclick="toggleCat(-1, {{num_cat}})">
