@@ -15,7 +15,8 @@ categories = []
 
 for i in range(0, len(cat)):
     categories += [{    "name": cat[i],
-                        "color": "#%06x" % random.randint(0, 0xFFFFFF)}]
+                        "color": "#%06x" % random.randint(0, 0xFFFFFF),
+                        "id": i}]
 
 
 tweets = []
@@ -27,11 +28,15 @@ for i in range(0,20):
     tweets[i]["author"] = "Hixe"
     tweets[i]["author_id"] = user
     tweets[i]["id"] = "711976556613267457"
+#
+# @app.route('/')
+# def index():
+#     return render_template('index.html', categories=categories, num_cat=len(categories), tweets=tweets, username="Twitter")
 
 @app.route('/')
-def index():
-    print (tweets[0])
-    return render_template('index.html', categories=categories, tweets=tweets)
+@app.route('/<username>')
+def index(username="Twitter"):
+    return render_template('index.html', categories=categories, num_cat=len(categories), tweets=tweets, username=username)
 
 if __name__ == '__main__':
     app.run()

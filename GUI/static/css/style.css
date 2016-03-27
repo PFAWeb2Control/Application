@@ -222,3 +222,26 @@ _:-ms-input-placeholder, :root .demo-graph {
     border-radius: 5px;
     padding: 0 5px 0 5px;
 }
+
+.head-boxes{
+    width: 50%;
+	box-sizing: border-box; /* this will set the boxes to flow along the border of the containing box */
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	float: left;
+}
+
+.cat-header{
+    color: white;
+    text-align: right;
+}
+
+
+.cat-item:hover {
+    background-color: white;
+}
+
+.list-item {
+    color: white;
+    font-weight: bold;
+}
