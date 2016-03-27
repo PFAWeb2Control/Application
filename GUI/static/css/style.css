@@ -251,3 +251,15 @@ _:-ms-input-placeholder, :root .demo-graph {
 .mdl-navigation__link:hover .list-item {
     color: black;
 }
+
+
+.mdl-textfield__input[type="text"] {
+    border-color: #FFFFFF;
+}
+.mdl-textfield__label{
+    color: #FFFFFF;
+}
+/*.mdl-textfield__input[type="number"]::-webkit-inner-spin-button, .mdl-textfield__input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0
+}*/

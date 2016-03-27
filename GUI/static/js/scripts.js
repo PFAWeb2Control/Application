@@ -1,3 +1,5 @@
+$("form").hide();
+
 function toggleCat(id, num)
 {
     array = Array.apply(null, Array(num)).map(function (_, i) {return i;});
@@ -8,4 +10,10 @@ function toggleCat(id, num)
         else
             $(".cat-" + i).show();
     }
+}
+
+function toggleForm(name)
+{
+    $('#form-' + name).show();
+    $('.display-' + name).hide();
 }

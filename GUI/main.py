@@ -4,8 +4,7 @@ from __future__ import unicode_literals
 import simplejson as json
 import random
 
-from flask import Flask
-from flask import render_template
+from flask import Flask, render_template, request, redirect, url_for
 app = Flask(__name__)
 
 user = "hixe33"
@@ -38,5 +37,9 @@ for i in range(0,20):
 def index(username="Twitter"):
     return render_template('index.html', categories=categories, num_cat=len(categories), tweets=tweets, username=username)
 
+@app.route('/switch', methods=['POST', 'GET'])
+def switchUser():
+    return redirect(url_for('index', username=request.form['username']))
+
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
