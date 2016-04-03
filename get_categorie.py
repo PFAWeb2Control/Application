@@ -12,8 +12,9 @@ import numpy as np
 import string
 import re
 from train_generate import train
+from preprocess import set_sentence_
 
-def get_categorie(X_test):
+def get_categorie_(X_test):
 
 	X_train,Y_train,target_names=train()
 
@@ -35,6 +36,7 @@ def get_categorie(X_test):
 
 	for item, labels in zip(X_test, all_labels):
 		print ' => %s' % (labels)
+	return all_labels
 
 
 if __name__ == '__main__':
@@ -42,4 +44,4 @@ if __name__ == '__main__':
 	sentence= raw_input('Donnez moi une phrase et je vous donne la categorie:\n')
 	X_test.append(sentence)
 	
-	get_categorie(X_test)
+	get_categorie_(X_test)
