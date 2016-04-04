@@ -40,7 +40,8 @@ class MyFilteredStream(FilteredStream):
 
             s=get_categorie_([tweet])[0]
             if (s != Nocat):
-                t["cat"]=s
+                t["cat"]=s.encode("utf-8")
+                t["text"] = t["text"].encode("utf-8")
                 self.corpus.append(t)
                 print tweet
                 print t
