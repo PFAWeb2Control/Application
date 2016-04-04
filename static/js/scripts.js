@@ -1,7 +1,13 @@
-var reloadTime = 5000;
+var reloadTime = 5000; // Refresh interval
 
 $("#form").hide();
 
+/*
+ * Change the visibility of a category
+ *
+ * id: The category's id
+ * num: The amount of categories
+ */
 function toggleCat(id, num)
 {
     array = Array.apply(null, Array(num)).map(function (_, i) {return i;});
@@ -14,12 +20,20 @@ function toggleCat(id, num)
     }
 }
 
+/**
+ * Change the visibility of a form
+ * name: Form's name
+ */
 function toggleForm(name)
 {
     $('#form-' + name).show();
     $('.display-' + name).hide();
 }
 
+/**
+ * Print the new set of tweets gathered with AJAJ
+ * data: Tweets' info, formatted to JSON
+ */
 function showTweets(data)
 {
     var length = data.result.length;
@@ -51,6 +65,10 @@ function showTweets(data)
     }
 }
 
+/**
+ * Print the new set of categories gathered with AJAJ
+ * data: Categories' info, formatted to JSON
+ */
 function showCategories(data)
 {
     var length = data.result.length;
@@ -68,9 +86,7 @@ function showCategories(data)
     }
 }
 
-window.setInterval( function(){$("#refresh-tweets").click();} , reloadTime);
-window.setInterval( function(){$("#refresh-cat").click();} , reloadTime);
-
+// Automatic refresh (1. functions binding)
 $('a#refresh-tweets').bind('click', function(){
     $.getJSON('./update_tweets',
     {json:true},
@@ -94,3 +110,7 @@ $('a#refresh-cat').bind('click', function(){
 
     return false;
 });
+
+// Automatic refresh (1. automatic event)
+window.setInterval( function(){$("#refresh-tweets").click();} , reloadTime);
+window.setInterval( function(){$("#refresh-cat").click();} , reloadTime);
