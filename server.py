@@ -4,35 +4,50 @@
 from __future__ import unicode_literals
 import simplejson as json
 import random
+import thread
+import numpy as np
 
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 app = Flask(__name__)
 
+import stream_categorie as sg
+from stream_categorie import MyFilteredStream as FStream
+# from stream_categorie import t as new_tweets
+# from stream_categorie import user_cat as new_categories
+
 user = "hixe33"
 max_tweets = 30
 
-new_categories = []
+# new_categories = sg.new_categories
+# new_categories = get_cat()
 categories = []
-new_tweets=[]
+# new_tweets=[]
 tweets=[]
 
-def init():
-    global new_categories, new_tweets
-    test_cat = ['Food', 'Politics', 'Fun', 'Hats', 'Trolling', 'Video games', 'Economy']
-    new_tweets = []
-    for i in range(0, len(test_cat)):
-        new_categories += [{   "color": "#%06x" % random.randint(0, 0xFFFFFF),
-                                "id": i,
-                                "name": test_cat[i]}]
+Nocat="Halloween"
+np.set_printoptions(formatter={'float': '{: 0.2f}'.format})
+stream = FStream()
+stream.stream()
 
-    with open("tweets.json", 'r') as f:
-        lst = json.loads(f.read())
-        for i in range(0,20):
-            new_tweets += [lst['tweets'][i]]
-            new_tweets[i]["cat"] = new_categories[random.randint(0, 6)]
-            new_tweets[i]["author"] = "Hixe"
-            new_tweets[i]["author_id"] = user
-            new_tweets[i]["id"] = "711976556613267457"
+# thread.start_new_thread(stream.stream(), ())
+
+# def init():
+#     global new_categories, new_tweets
+#     test_cat = ['Food', 'Politics', 'Fun', 'Hats', 'Trolling', 'Video games', 'Economy']
+#     new_tweets = []
+#     for i in range(0, len(test_cat)):
+#         new_categories += [{   "color": "#%06x" % random.randint(0, 0xFFFFFF),
+#                                 "id": i,
+#                                 "name": test_cat[i]}]
+#
+#     with open("tweets.json", 'r') as f:
+#         lst = json.loads(f.read())
+#         for i in range(0,20):
+#             new_tweets += [lst['tweets'][i]]
+#             new_tweets[i]["cat"] = new_categories[random.randint(0, 6)]
+#             new_tweets[i]["author"] = "Hixe"
+#             new_tweets[i]["author_id"] = user
+#             new_tweets[i]["id"] = "711976556613267457"
 
 @app.route('/')
 @app.route('/<username>')
@@ -46,26 +61,42 @@ def switchUser():
 
 @app.route('/update_categories', methods=['POST', 'GET'])
 def update_categories(json=True):
-    global new_categories, categories
+    global categories, stream
 
+    new_categories = stream.get_new_categories()
+    print("SWAG")
+    print("new C : ")
+    print(len(new_categories))
+    print("----")
     for c in new_categories:
-        categories += [c]
+        print c
+        categories += [{   "color": "#%06x" % random.randint(0, 0xFFFFFF),
+                            "id": len(categories),
+                            "name": c}]
 
-    new_categories = []
     if json:
         return jsonify(result=categories)
 
 @app.route('/update_tweets', methods=['POST', 'GET'])
 def update_tweets(json=True):
-    global new_tweets, tweets, max_tweets, categories
+    global tweets, max_tweets, stream, categories
 
-    for t in new_tweets:
-        tweets += [t]
+    print(len(tweets))
+    print("YOLO")
+    print("new-t : ")
+    print (len(stream.get_corpus()) )
+    print("****")
+    for nt in stream.get_corpus():
+        print nt
+        tweets += [nt]
 
         if len(tweets) > max_tweets:
             tweets.pop(0)
 
-    new_tweets = []
+    stream.clear_corpus()
+
+    print(tweets)
+
     if json:
         return jsonify(result=tweets)
 
@@ -74,5 +105,6 @@ def update_tweets(json=True):
     # return redirect(url_for('index', username=user))
 
 if __name__ == '__main__':
-    init()
-    app.run(debug=True)
+    # init()
+    thread.start_new_thread(app.run(), debug=True)
+    # app.run()

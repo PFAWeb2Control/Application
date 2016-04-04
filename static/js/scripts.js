@@ -72,10 +72,11 @@ window.setInterval( function(){$("#refresh-tweets").click();} , reloadTime);
 window.setInterval( function(){$("#refresh-cat").click();} , reloadTime);
 
 $('a#refresh-tweets').bind('click', function(){
-    $('#refresh-tweets').hide();
     $.getJSON('./update_tweets',
     {json:true},
     function(data) {
+        if(data.result.length > 0)
+            $('#refresh-tweets').hide();
         showTweets(data);
     });
 
@@ -83,10 +84,11 @@ $('a#refresh-tweets').bind('click', function(){
 });
 
 $('a#refresh-cat').bind('click', function(){
-    $('#refresh-cat').hide();
     $.getJSON('./update_categories',
     {json:true},
     function(data) {
+        if(data.result.length > 0)
+            $('#refresh-cat').hide();
         showCategories(data);
     });
 

@@ -12,15 +12,18 @@ import nltk
 from nltk.corpus import stopwords
 import preprocessor as p
 from preprocess import set_sentence
-from user_categories import user_categories_
+from user_categories import user_categories_ as usr_cat
 
-user_cat=user_categories_()
+user_cat=usr_cat()
 Nocat="Halloween"
 
 np.set_printoptions(formatter={'float': '{: 0.2f}'.format})
 
 class MyFilteredStream(FilteredStream):
     def __init__(self):
+
+        self.corpus = []
+        self.new_cat = user_cat
 
         self.criterias = {
             "track": user_cat,
@@ -30,24 +33,33 @@ class MyFilteredStream(FilteredStream):
         FilteredStream.__init__(self, self.criterias, 10, "config.json")
 
     def action(self, tweets_list):
-        corpus = []
         for t in tweets_list:
             tweet = t["text"]
             tweet = p.clean(tweet.encode("utf-8"))
             #tweet = set_sentence(tweet.encode("utf-8"))
-           
-            s=get_categorie_([tweet])
+
+            s=get_categorie_([tweet])[0]
             if (s != Nocat):
-                corpus.append(tweet)
                 t["cat"]=s
+                self.corpus.append(t)
                 print tweet
                 print t
-        
 
+    def get_corpus(self):
+        r = []
+        for t in self.corpus:
+            r += [t]
+        return r
 
-        
+    def clear_corpus(self):
+        self.corpus = []
 
-       
+    def get_new_categories(self):
+        r = []
+        for t in self.new_cat:
+            r += [t]
+        self.new_cat = []
+        return r
 
 stream = MyFilteredStream()
 stream.stream()
